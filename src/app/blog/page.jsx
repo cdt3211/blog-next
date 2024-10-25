@@ -1,12 +1,14 @@
 import PostsList from '@/components/postsList'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 export default function Blog() {
 
   return (
     <>
       <div>Blog</div>
-      <PostsList />
+      <Suspense fallback={<div>loading</div>}>
+        <PostsList />
+      </Suspense>
     </>
   )
 }

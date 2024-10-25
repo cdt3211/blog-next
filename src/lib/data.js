@@ -1,21 +1,25 @@
 
-"use server"
+import { Post } from "./models"
+import { connectToDb } from "./utils"
+
 export async function getPosts() {
   try {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-    return res.json()
+    connectToDb();
+    const posts = await Post.find();
+    return posts;
   } catch (err) {
-    console.error(err)
-    return { error: 'An error occurred' }
+    console.error(err);
+    throw new Error("failed to fetch posts");
   }
-}
+};
 
-export async function getPostById(postId) {
+export async function getPostById(_id) {
   try {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
-    return res.json()
+    connectToDb();
+    const post = await Post.findById({ _id });
+    return post;
   } catch (err) {
     console.error(err)
-    return { error: 'An error occurred' }
+    throw new Error("failed to fetch post");
   }
 }

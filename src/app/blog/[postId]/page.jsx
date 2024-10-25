@@ -1,16 +1,22 @@
 import { getPostById } from '@/lib/data'
+import Link from 'next/link';
 import React from 'react'
 
 export default async function Post({ params }) {
   const { postId } = await params;
   const post = await getPostById(postId);
-  console.log(post)
   return (
-    <>
-      <div className='container'>Post</div>
-      <h1>{post.title}</h1>
-      {post.body}
-    </>
+    <div className='flex flex-col items-center'>
+      <div className='prose w-full'>
+        <h1>{post.title}</h1>
+        {post.category && <p>#{post.category}</p>}
+        <Link href={`/write/${postId}`}>Edit</Link>
+        <p>{new Date(post.createdAt).toLocaleDateString()}</p>
+        <article>
+          {post.content}
+        </article>
+      </div>
+    </div>
 
   )
 }
