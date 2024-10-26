@@ -1,4 +1,4 @@
-import PostForm from '@/components/postForm'
+import PostForm from '@/components/post/postForm'
 import { addPost } from '@/lib/action'
 import React from 'react'
 

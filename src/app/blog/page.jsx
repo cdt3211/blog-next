@@ -1,4 +1,4 @@
-import PostsList from '@/components/postsList'
+import PostsList from '@/components/post/postsList'
 import React, { Suspense } from 'react'
 
 export default function Blog() {

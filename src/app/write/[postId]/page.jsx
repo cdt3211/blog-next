@@ -1,4 +1,4 @@
-import PostForm from '@/components/postForm';
+import PostForm from '@/components/post/postForm';
 import { updatePost } from '@/lib/action'
 import { getPostById } from '@/lib/data';
 import React from 'react'
