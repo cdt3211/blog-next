@@ -35,7 +35,6 @@ export async function updatePost(formData) {
     await post.save();
     revalidatePath('/blog');
     revalidatePath(`/blog/${id}`);
-    return post;
   } catch (err) {
     console.error(err);
     return { error: 'Failed to update post' };
