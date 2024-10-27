@@ -1,8 +1,8 @@
 import DeletePostButton from '@/components/post/deletePost';
-import { deletePost } from '@/lib/action';
 import { getPostById } from '@/lib/data'
 import Link from 'next/link';
 import React from 'react'
+import Markdown from "react-markdown";
 
 export default async function Post({ params }) {
   const { postId } = await params;
@@ -16,7 +16,7 @@ export default async function Post({ params }) {
         <DeletePostButton postId={postId} />
         <p>{new Date(post.createdAt).toLocaleDateString()}</p>
         <article>
-          {post.content}
+          <Markdown>{post.content}</Markdown>
         </article>
       </div>
     </div>
