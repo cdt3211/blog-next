@@ -1,4 +1,4 @@
-import { getPosts } from '@/lib/data'
+import { getPosts } from '@/lib/actions/posts';
 import Link from 'next/link';
 import React from 'react'
 
@@ -11,7 +11,7 @@ export default async function PostsList() {
     <>
       {posts.map(post => (
         <div key={post.id}>
-          <Link href={`/blog/${post._id}`}>{post.title}</Link>
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </div>
       ))}
     </>

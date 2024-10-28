@@ -1,5 +1,5 @@
 import PostForm from '@/components/post/postForm';
-import { updatePost } from '@/lib/action'
+import { updatePost } from '@/lib/actions/posts'
 import { getPostById } from '@/lib/data';
 import React from 'react'
 
