@@ -1,7 +1,7 @@
 'use server'
 
 import { Category } from "../models/category";
-import { connectToDb } from "../utils";
+import { connectToDb } from "../connectToDb";
 
 // 获取分类
 export async function getCategories() {

@@ -16,12 +16,9 @@ const userSchema = new Schema({
     type: String,
     required: true,
     min: 6
-  },
-  avatar: {
-    type: String
-  },
+  }
 })
 
 
 
-export const User = mongoose.models.User || mongoose.model('User', userSchema);
+export const User = mongoose.models?.User || mongoose.model('User', userSchema);

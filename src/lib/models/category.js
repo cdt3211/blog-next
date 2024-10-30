@@ -35,4 +35,4 @@ categorySchema.pre('validate', function (next) {
   next();
 })
 
-export const Category = mongoose.models.Category || mongoose.model('Category', categorySchema);
+export const Category = mongoose.models?.Category || mongoose.model('Category', categorySchema);

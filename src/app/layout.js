@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
         className={` font-mono bg-gray-50 flex flex-col min-h-screen`}
       >
         <Header />
-        <main className="flex-1 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 mx-auto">
           {children}
         </main>
         <Footer />

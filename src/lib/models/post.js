@@ -51,4 +51,4 @@ postSchema.pre('validate', function (next) {
   next();
 })
 
-export const Post = mongoose.models.Post || mongoose.model('Post', postSchema);
+export const Post = mongoose.models?.Post || mongoose.model('Post', postSchema);

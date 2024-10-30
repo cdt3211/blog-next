@@ -7,7 +7,6 @@ import Markdown from "react-markdown";
 export default async function Post({ params }) {
   const { slug } = await params;
   const post = await getPost(slug);
-  console.log(post)
   return (
     <div className='flex flex-col items-center'>
       <div className='prose w-full'>
