@@ -2,6 +2,7 @@
 import bcrypt from 'bcryptjs';
 import { User } from '../models/user';
 import { connectToDb } from '../connectToDb';
+import { signIn, signOut } from '@/auth';
 
 export const register = async (previousState, formData) => {
   const { username, email, password, passwordRepeat } = Object.fromEntries(formData);
@@ -35,4 +36,23 @@ export const register = async (previousState, formData) => {
     console.error(err);
     throw new Error('Error registering user');
   }
+}
+
+export const login = async (prevState, formData) => {
+  const { username, password } = Object.fromEntries(formData);
+
+  try {
+    await signIn("credentials", { username, password });
+  } catch (err) {
+    console.log(err);
+
+    if (err.message.includes("CredentialsSignin")) {
+      return { error: "Invalid username or password" };
+    }
+    throw err;
+  }
+};
+
+export const handleLogout = async () => {
+  await signOut();
 }

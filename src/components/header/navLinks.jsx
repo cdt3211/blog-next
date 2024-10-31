@@ -1,3 +1,6 @@
+'use client'
+import { auth, signOut } from '@/auth'
+import { handleLogout } from '@/lib/actions/authActions'
 import Link from 'next/link'
 import React from 'react'
 
@@ -16,11 +19,11 @@ const links = [
   },
   {
     name: 'Write',
-    path: '/write',
+    path: '/admin/write',
   }
 
 ]
-export default function NavLinks() {
+export default function NavLinks({ session }) {
   return (
     <div className='space-x-8 flex'>
       {links.map(link => (
@@ -28,6 +31,15 @@ export default function NavLinks() {
           {link.name}
         </Link>
       ))}
+      {session ? (
+        <form action={handleLogout}>
+          <button>Logout</button>
+        </form>
+      ) : (
+        <Link href='/user/login'>
+          Login
+        </Link>
+      )}
     </div>
   )
 }

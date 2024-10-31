@@ -3,6 +3,7 @@ import { connectToDb } from "./lib/connectToDb";
 import { User } from "./lib/models/user";
 import bcrypt from "bcryptjs";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { authConfig } from "./auth.config";
 
 const login = async (credentials) => {
   try {
@@ -26,7 +27,13 @@ const login = async (credentials) => {
   }
 }
 
-const authOptions = {
+export const {
+  handlers,
+  auth,
+  signIn,
+  signOut,
+} = NextAuth({
+  ...authConfig,
   providers: [
     CredentialsProvider({
       async authorize(credentials) {
@@ -39,12 +46,7 @@ const authOptions = {
       }
     })
   ],
-  pages: {
-    signIn: '/login',
-    error: '/login',
+  callbacks: {
+    ...authConfig.callbacks
   }
-};
-
-// const nextAuthInstance = NextAuth(authOptions);
-
-export { authOptions }
+});

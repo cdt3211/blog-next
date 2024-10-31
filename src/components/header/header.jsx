@@ -1,8 +1,10 @@
 import React from 'react'
 import NavLinks from './navLinks'
 import Link from 'next/link'
+import { auth } from '@/auth';
 
-export default function Header() {
+export default async function Header() {
+  const session = await auth();
   return (
     <header className='border-b shadow-sm'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -10,7 +12,7 @@ export default function Header() {
           <div className='flex items-center'>
             <Link className='text-xl font-bold' href={'/'}>Abner</Link>
           </div>
-          <NavLinks />
+          <NavLinks session={session} />
         </div>
       </div>
     </header>
