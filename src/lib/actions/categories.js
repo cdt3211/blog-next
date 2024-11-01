@@ -8,7 +8,10 @@ export async function getCategories() {
   try {
     await connectToDb();
     const categories = await Category.find().lean();
-    return categories;
+    return categories.map(category => ({
+      ...category,
+      _id: category._id.toString()
+    }))
   } catch (err) {
     console.error(err);
     return { error: 'Failed to get categories' };

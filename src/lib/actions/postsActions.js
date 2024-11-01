@@ -6,10 +6,12 @@ import { connectToDb } from "../connectToDb";
 import { redirect } from "next/navigation";
 import { Category } from "../models/category";
 
+
+connectToDb();
+
 // 添加文章
-export async function addPost(formData) {
+export const addPost = async (previousState, formData) => {
   try {
-    await connectToDb();
     const newPost = new Post({
       title: formData.get('title'),
       content: formData.get('content'),
@@ -19,17 +21,15 @@ export async function addPost(formData) {
     })
     await newPost.save();
     revalidatePath('/blog');
+    return { success: true };
   } catch (err) {
     console.error(err);
     return { error: 'Failed to add post' };
   }
-  redirect(`/blog`);
 }
 
 export async function updatePost(postId, formData) {
   try {
-    await connectToDb();
-
     const updateData = {
       title: formData.get('title'),
       content: formData.get('content'),
@@ -47,7 +47,7 @@ export async function updatePost(postId, formData) {
       return { success: false, error: '文章不存在' }
     }
     revalidatePath('/blog');
-    revalidatePath(`/blog/${id}`);
+    revalidatePath(`/blog/${postId}`);
   } catch (err) {
     console.error(err);
     return { error: 'Failed to update post' };
@@ -57,51 +57,14 @@ export async function updatePost(postId, formData) {
 
 export async function deletePost(postId) {
   try {
-    await connectToDb();
-
     const post = await Post.findByIdAndDelete(postId)
-
     if (!post) {
       return { success: false, error: '文章不存在' }
     }
-
     revalidatePath('/blog');
+    redirect(`/blog`);
   } catch (err) {
     console.error(err);
     return { error: 'Failed to delete post' };
-  }
-  redirect(`/blog`);
-}
-
-// 获取单篇文章
-export async function getPost(slug) {
-  try {
-    await connectToDb()
-
-    const post = await Post
-      .findOne({ slug })
-      .populate('category')
-      .lean()
-
-    if (!post) {
-      return { success: false, error: '文章不存在' }
-    }
-
-    return post
-  } catch (error) {
-    console.error('获取文章失败:', error)
-    return { success: false, error: '获取文章失败' }
-  }
-}
-
-// 获取文章列表
-export async function getPosts() {
-  try {
-    await connectToDb()
-    const posts = await Post.find();
-    return posts;
-  } catch (err) {
-    console.error(err);
-    throw new Error("failed to fetch posts");
   }
 }

@@ -1,25 +1,21 @@
+import { Post } from "./models/post"
 
-// import { Post } from "./models/post"
-// import { connectToDb } from "./utils"
+export async function fetchPosts() {
+  try {
+    const posts = await Post.find();
+    return posts;
+  } catch (err) {
+    console.error(err);
+    throw new Error("failed to fetch posts");
+  }
+};
 
-// export async function getPosts() {
-//   try {
-//     connectToDb();
-//     const posts = await Post.find();
-//     return posts;
-//   } catch (err) {
-//     console.error(err);
-//     throw new Error("failed to fetch posts");
-//   }
-// };
-
-// export async function getPostById(_id) {
-//   try {
-//     connectToDb();
-//     const post = await Post.findById({ _id });
-//     return post;
-//   } catch (err) {
-//     console.error(err)
-//     throw new Error("failed to fetch post");
-//   }
-// }
+export async function fetchPostBySlug(slug) {
+  try {
+    const post = await Post.findOne({ slug }).populate('category').lean()
+    return post;
+  } catch (err) {
+    console.error(err);
+    throw new Error("failed to fetch post");
+  }
+}

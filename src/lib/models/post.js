@@ -35,6 +35,8 @@ const postSchema = new Schema({
   { timestamps: true }
 )
 
+postSchema.index({ slug: 1 });
+
 postSchema.pre('validate', function (next) {
   if (this.title) {
     // 将中文转换为拼音

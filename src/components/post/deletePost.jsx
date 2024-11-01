@@ -1,5 +1,5 @@
 'use client'
-import { deletePost } from '@/lib/actions/posts'
+import { deletePost } from '@/lib/actions/postsActions'
 import React from 'react'
 
 export default function DeletePostButton({ postId }) {

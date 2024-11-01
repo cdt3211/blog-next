@@ -1,7 +1,9 @@
 import Footer from "@/components/footer";
 import "./globals.css";
 import Header from "@/components/header/header";
+import { connectToDb } from "@/lib/connectToDb";
 
+connectToDb();
 
 export const metadata = {
   title: "Create Next App",
@@ -15,7 +17,7 @@ export default function RootLayout({ children }) {
         className={` font-mono bg-gray-50 flex flex-col min-h-screen`}
       >
         <Header />
-        <main className="flex-1 mx-auto">
+        <main className="flex-1 mx-auto w-2/5 p-4">
           {children}
         </main>
         <Footer />

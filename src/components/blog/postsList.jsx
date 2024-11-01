@@ -1,19 +1,20 @@
-import { getPosts } from '@/lib/actions/posts';
+import { fetchPosts } from '@/lib/data';
 import Link from 'next/link';
 import React from 'react'
 
-export default async function PostsList() {
-  const posts = await getPosts();
-  if (!Array.isArray(posts)) {
-    return <div>无法获取帖子列表，请稍后再试。</div>;
-  }
+
+export default async function PostList() {
+  const posts = await fetchPosts();
   return (
-    <>
-      {posts.map(post => (
-        <div key={post.id}>
-          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-        </div>
+    <ul className="space-y-4 w-full">
+      {posts.map((post) => (
+        <li key={post._id} className="p-4 border rounded hover:bg-gray-100">
+          <Link href={`/blog/${post.slug}`}>
+            <div className="font-bold">{post.title}</div>
+            <div className='text-gray-400 text-sm'>{new Date(post.createdAt).toLocaleDateString()}</div>
+          </Link>
+        </li>
       ))}
-    </>
+    </ul>
   )
 }

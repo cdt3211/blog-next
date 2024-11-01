@@ -13,9 +13,9 @@ export default function LoginForm() {
       <input type="password" placeholder="password" name="password" />
       <button>Login</button>
       {state?.error}
-      <Link href="/user/register">
+      {/* <Link href="/user/register">
         {"Don't have an account?"} <b>Register</b>
-      </Link>
+      </Link> */}
     </form>
   );
 };
