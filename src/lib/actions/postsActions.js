@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { Post } from "../models/post";
 import { connectToDb } from "../connectToDb";
 import { redirect } from "next/navigation";
-import { Category } from "../models/category";
 
 
 connectToDb();

@@ -4,7 +4,7 @@ import { User } from '../models/user';
 import { connectToDb } from '../connectToDb';
 import { signIn, signOut } from '@/auth';
 
-export const register = async (previousState, formData) => {
+export const register = async (formData) => {
   const { username, email, password, passwordRepeat } = Object.fromEntries(formData);
 
   if (password !== passwordRepeat) {
@@ -12,7 +12,6 @@ export const register = async (previousState, formData) => {
   }
 
   try {
-    await connectToDb();
 
     const user = await User.findOne({ username });
 
@@ -38,7 +37,7 @@ export const register = async (previousState, formData) => {
   }
 }
 
-export const login = async (prevState, formData) => {
+export const login = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
 
   try {

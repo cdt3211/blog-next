@@ -1,5 +1,3 @@
-'use client'
-import { auth, signOut } from '@/auth'
 import { handleLogout } from '@/lib/actions/authActions'
 import Link from 'next/link'
 import React from 'react'

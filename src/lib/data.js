@@ -1,4 +1,5 @@
 import { Post } from "./models/post"
+import { Category } from "./models/category";
 
 export async function fetchPosts() {
   try {
