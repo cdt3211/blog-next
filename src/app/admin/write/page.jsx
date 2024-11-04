@@ -1,9 +1,9 @@
 import WriteForm from '@/components/write/writeForm'
-import { getCategories } from '@/lib/actions/categories'
+import { fetchCategories } from '@/lib/data'
 import React from 'react'
 
 export default async function Write() {
-  const categories = await getCategories();
+  const categories = await fetchCategories();
 
   return (
     <div className="w-full mx-auto p-4">

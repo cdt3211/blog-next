@@ -9,14 +9,14 @@ import { redirect } from "next/navigation";
 connectToDb();
 
 // 添加文章
-export const addPost = async (previousState, formData) => {
+export const addPost = async (formData) => {
   try {
     const newPost = new Post({
-      title: formData.get('title'),
-      content: formData.get('content'),
-      category: formData.get('category'),
-      tags: formData.get('tags').split(',').map(tag => tag.trim()),
-      status: formData.get('status') || 'draft'
+      title: formData.title,
+      content: formData.content,
+      category: formData.category,
+      tags: formData.tags.split(',').map(tag => tag.trim()),
+      status: formData.status || 'draft'
     })
     await newPost.save();
     revalidatePath('/blog');

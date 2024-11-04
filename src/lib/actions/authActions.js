@@ -43,12 +43,7 @@ export const login = async (formData) => {
   try {
     await signIn("credentials", { username, password });
   } catch (err) {
-    console.log(err);
-
-    if (err.message.includes("CredentialsSignin")) {
-      return { error: "Invalid username or password" };
-    }
-    throw err;
+    return { error: "用户名或密码错误！" };
   }
 };
 
